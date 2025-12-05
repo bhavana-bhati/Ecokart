@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Gallery - EcoKart</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #fff7f0;
+    }
+  h1{
+    text-align: left;
+    margin: 20px 0 10px 30px;
+    font-style:italic;
+    font-weight:bolder;
+      font-size: 50px;
+      color: olive
+      ;
+  }  
+
+    h2 {
+      text-align: left;
+      margin: 10px 0 10px 30px;
+      font-style: italic;
+      font-size: 32px;
+      color: olive;
+    }
+
+    .gallery {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 30px;
+      margin: 0 auto;
+      max-width: 1200px;
+      padding: 20px;
+    }
+
+    .gallery-item {
+      position: relative;
+      width: 300px;
+      height: 350px;
+      overflow: hidden;
+      border-radius: 30px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      transition: transform 0.3s;
+    }
+
+    .gallery-item:hover {
+      transform: scale(1.03);
+    }
+
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      cursor: pointer;
+    }
+
+    .staggered:nth-child(odd) {
+      margin-top: 40px;
+    }
+
+    .view-btn {
+      display: block;
+      margin: 30px auto 60px auto;
+      padding: 10px 20px;
+      font-size: 18px;
+      background: olivedrab;
+      color: white;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .view-btn:hover {
+      background: olivedrab;
+    }
+
+    /* Lightbox */
+    .lightbox {
+      display: none;
+      position: fixed;
+      z-index: 9999;
+      left: 0;
+      top: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0, 0, 0, 0.85);
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+    }
+
+    .lightbox img {
+      max-width: 90%;
+      max-height: 80%;
+      border-radius: 12px;
+    }
+
+    .nav-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 40px;
+      color: white;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 20px;
+    }
+
+    .prev-btn { left: 5%; }
+    .next-btn { right: 5%; }
+
+    .close-btn {
+      position: absolute;
+      top: 30px;
+      right: 40px;
+      font-size: 30px;
+      color: white;
+      background: none;
+      border: none;
+      cursor: pointer;
+    }
+
+    @media (max-width: 768px) {
+      .gallery-item {
+        width: 90%;
+        height: 180px;
+      }
+
+      .staggered:nth-child(odd) {
+        margin-top: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Gallery</h1>
+  <h2>Quick tour to our website</h2>
+
+
+  <div class="gallery" id="gallery">
+    <div class="gallery-item staggered"><img src="https://i.pinimg.com/736x/fb/e0/89/fbe089fe2a627eafec879e5781e633ed.jpg" alt=""></div>
+    <div class="gallery-item"><img src="https://thumbs.dreamstime.com/b/bamboo-products-12722253.jpg" alt=""></div>
+    <div class="gallery-item staggered"><img src="https://i.pinimg.com/1200x/10/e5/d7/10e5d780ca81dcf0f62aa90bdcf6ad6d.jpg" alt=""></div>
+    <div class="gallery-item"><img src="https://architectexpo.com/2022/wp-content/uploads/2022/01/26858-1200x800.jpg" alt=""></div>
+    <div class="gallery-item staggered"><img src="https://timesofindia.indiatimes.com/photo/msid-78623131,imgsize-320927.cms" alt=""></div>
+    <div class="gallery-item"><img src="https://i.ytimg.com/vi/CYSfM_RKsTI/maxresdefault.jpg" alt=""></div>
+  <div class="gallery-item"><img src="https://i.pinimg.com/736x/8b/52/e9/8b52e99825e9cf0de78b8c6c725bdb46.jpg" alt=""></div>
+    <div class="gallery-item"><img src="https://i.pinimg.com/736x/39/42/06/3942068c0153280a4b88c5b09ced6ffd.jpg" alt=""></div>
+  </div>
+
+  <button class="view-btn" onclick="openLightbox(0)">View Gallery</button>
+
+  <!-- Lightbox Viewer -->
+  <div class="lightbox" id="lightbox">
+    <button class="close-btn" onclick="closeLightbox()">✖</button>
+    <button class="nav-btn prev-btn" onclick="changeImage(-1)">❮</button>
+    <img id="lightbox-img" src="" alt="Gallery Image">
+    <button class="nav-btn next-btn" onclick="changeImage(1)">❯</button>
+  </div>
+
+  <script>
+    const images = Array.from(document.querySelectorAll('.gallery-item img'));
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightbox-img');
+    let currentIndex = 0;
+
+    function openLightbox(index) {
+      currentIndex = index;
+      lightboxImg.src = images[currentIndex].src;
+      lightbox.style.display = 'flex';
+    }
+
+    function closeLightbox() {
+      lightbox.style.display = 'none';
+    }
+
+    function changeImage(direction) {
+      currentIndex += direction;
+      if (currentIndex < 0) currentIndex = images.length - 1;
+      if (currentIndex >= images.length) currentIndex = 0;
+      lightboxImg.src = images[currentIndex].src;
+    }
+
+    // Click image to open lightbox
+    images.forEach((img, index) => {
+      img.addEventListener('click', () => openLightbox(index));
+    });
+  </script>
+
+</body>
+</html>

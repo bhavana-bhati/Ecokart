@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Request a Call - Bamboo Bliss</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #F5F5DC; /* Beige background */
+      color: #556B2F; /* Olive green text */
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 40px 20px;
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .logo {
+      font-size: 2.5rem;
+      font-weight: bold;
+      color: #556B2F;
+      margin-bottom: 10px;
+    }
+
+    .tagline {
+      font-style: italic;
+      color: #8A9A5B;
+    }
+
+    .contact-section {
+      background: white;
+      padding: 40px;
+      border-radius: 15px;
+      box-shadow: 0 5px 20px rgba(85, 107, 47, 0.1);
+      border: 2px solid #D2DE9F;
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 30px;
+      font-size: 2rem;
+      color: #556B2F;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 600;
+      color: #556B2F;
+    }
+
+    input {
+      width: 100%;
+      padding: 12px;
+      border: 2px solid #D2DE9F;
+      border-radius: 8px;
+      font-size: 16px;
+      background-color: #F8F8F8;
+      transition: border-color 0.3s ease;
+    }
+
+    input:focus {
+      outline: none;
+      border-color: #8A9A5B;
+      background-color: white;
+    }
+
+    .submit-btn {
+      background-color: #8A9A5B; /* Olive green */
+      color: white;
+      padding: 15px 30px;
+      border: none;
+      border-radius: 8px;
+      font-size: 18px;
+      font-weight: 600;
+      cursor: pointer;
+      width: 100%;
+      transition: background-color 0.3s ease;
+    }
+
+    .submit-btn:hover {
+      background-color: #556B2F;
+    }
+
+    .contact-info {
+      margin-top: 40px;
+      text-align: center;
+    }
+
+    .info-item {
+      margin-bottom: 15px;
+      font-size: 16px;
+    }
+
+    .info-item strong {
+      color: #556B2F;
+    }
+
+    .go-back-btn {
+      display: block;
+      margin: 30px auto 0;
+      padding: 12px 25px;
+      background-color: transparent;
+      color: #556B2F;
+      border: 2px solid #8A9A5B;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-decoration: none;
+      text-align: center;
+      max-width: 200px;
+    }
+
+    .go-back-btn:hover {
+      background-color: #8A9A5B;
+      color: white;
+    }
+
+    .success-message {
+      display: none;
+      background-color: #D4EDDA;
+      color: #155724;
+      padding: 20px;
+      border-radius: 8px;
+      text-align: center;
+      margin-top: 20px;
+      border: 1px solid #C3E6CB;
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        padding: 20px 15px;
+      }
+
+      .contact-section {
+        padding: 30px 20px;
+      }
+
+      .section-title {
+        font-size: 1.5rem;
+      }
+    }
+
+    .bamboo-decoration {
+      text-align: center;
+      margin-bottom: 20px;
+      font-size: 2rem;
+      color: #8A9A5B;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <div class="logo">🌿 Bamboo Bliss</div>
+      <div class="tagline">Sustainable Living, Naturally</div>
+    </div>
+
+    <div class="contact-section">
+      <div class="bamboo-decoration">🎋</div>
+      <h2 class="section-title">Request a Phone Call</h2>
+
+      <form id="contactForm" novalidate>
+        <div class="form-group">
+          <label for="name">Full Name</label>
+          <input
+            type="text"
+            id="name"
+            name="name"
+            required
+            placeholder="Enter your full name"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="phone">Phone Number</label>
+          <input
+            type="tel"
+            id="phone"
+            name="phone"
+            required
+            placeholder="+1 555 123 4567"
+            pattern="^\+?[0-9\s\-]{7,15}$"
+            title="Enter a valid phone number"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="preferredTime">Preferred Time to Call (optional)</label>
+          <input
+            type="text"
+            id="preferredTime"
+            name="preferredTime"
+            placeholder="e.g., Weekdays 2-5 PM"
+          />
+        </div>
+
+        <button type="submit" class="submit-btn">Request a Call</button>
+      </form>
+
+      <div id="successMessage" class="success-message">
+        Thank you! We will call you at the provided number as soon as possible.
+      </div>
+
+      <div class="contact-info">
+        <div class="info-item">
+          <strong>📧 Email:</strong> hello@bamboobliss.com
+        </div>
+        <div class="info-item">
+          <strong>📞 Phone:</strong> +1 (555) 123-BAMB
+        </div>
+        <div class="info-item">
+          <strong>🕒 Hours:</strong> Mon-Fri 9AM-6PM EST
+        </div>
+      </div>
+    </div>
+
+    <a href="javascript:history.back()" class="go-back-btn">Go Back</a>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const contactForm = document.getElementById('contactForm');
+      const successMessage = document.getElementById('successMessage');
+
+      contactForm.addEventListener('submit', function (e) {
+        e.preventDefault();
+
+        const name = document.getElementById('name').value.trim();
+        const phone = document.getElementById('phone').value.trim();
+        const preferredTime = document.getElementById('preferredTime').value.trim();
+
+        if (!name || !phone) {
+          alert('Please fill in your name and phone number.');
+          return;
+        }
+
+        // Phone number validation (basic)
+        const phoneRegex = /^\+?[0-9\s\-]{7,15}$/;
+        if (!phoneRegex.test(phone)) {
+          alert('Please enter a valid phone number.');
+          return;
+        }
+
+        // Simulate form submission success
+        contactForm.style.display = 'none';
+        successMessage.style.display = 'block';
+
+        // Log form data (replace with actual backend submission)
+        console.log('Call request submitted:', { name, phone, preferredTime });
+
+        // Reset form and UI after 5 seconds
+        setTimeout(() => {
+          contactForm.reset();
+          contactForm.style.display = 'block';
+          successMessage.style.display = 'none';
+        }, 5000);
+      });
+    });
+  </script>
+</body>
+</html>

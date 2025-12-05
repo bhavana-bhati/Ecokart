@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Products</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: 'Lato', sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            background:rgb(220, 220, 138);
+        }
+
+        .facility-cards {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            flex-wrap: nowrap;
+        }
+
+        .card {
+            width: 350px;
+            height: 450px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0px 7px 10px rgba(0, 0, 0, 0.5);
+            transition: 0.5s ease-in-out;
+            border-radius: 15px;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+        }
+
+        .card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, rgba(105, 105, 50, 0.5), rgb(182, 182, 30));
+            z-index: 2;
+            transition: 0.5s ease-in-out;
+            opacity: 0;
+        }
+
+        .card:hover::before {
+            opacity: 1;
+        }
+
+        .card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        .card .info {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            padding: 20px;
+            text-align: center;
+            font-size: x-large;
+            color: rgb(11, 11, 3);
+            z-index: 3;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: 0.5s ease-in-out;
+        }
+
+        .card:hover .info {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .btn {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 10px 15px;
+            background-color: green;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background 0.3s;
+        }
+
+        .btn:hover {
+            background-color: darkgreen;
+        }
+
+        .book-now {
+            margin-top: 30px;
+            padding: 15px 30px;
+            background-color: #c2185b;
+            color: white;
+            font-size: 18px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .book-now:hover {
+            background-color: #8e1443;
+        }
+
+        /* Modal Styling */
+        .modal {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 400px;
+            background: white;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            z-index: 1000;
+            display: none;
+        }
+
+        .modal h2 {
+            margin-bottom: 15px;
+        }
+
+        .modal button {
+            padding: 10px 20px;
+            margin-top: 10px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        .close-btn {
+            background: #c2185b ;
+            color: white;
+        }
+
+        .login-btn {
+            background: #c2185b;
+            color: white;
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+ <h2 style="color: #5e6230; font-size:50px; height:90px">EXPLORE THE PRODUCTS</h2>
+<section id="facility"> 
+    <div class="facility-cards">
+        <div class="card">
+            <img src="https://www.yibamboo.com/wp-content/uploads/2023/12/About-wooden.jpg" alt="Kichenware">
+            <div class="info">
+                <h3>KICHENWARE</h3>
+                <p>Eco‑friendly bamboo utensils, plates, and boards. Durable & lightweight.</p>
+                <a href="kitchenware.php" class="btn">View more</a>
+            </div>
+        </div>
+
+        <div class="card">
+            <img src="https://img.freepik.com/premium-photo/photo-sustainable-bamboo-furniture-collection_933496-46224.jpg" alt="Furniture">
+            <div class="info">
+                <h3>FURNITURE</h3>
+                <p>Stylish, strong bamboo tables, chairs, and shelves.</p>
+                <a href="furniture.php" class="btn">View more</a>
+            </div>
+        </div>
+
+        <div class="card">
+            <img src="https://tse4.mm.bing.net/th/id/OIP.I3koUsr3MNOJusXf-Y6EtwHaHa?rs=1&pid=ImgDetMain&o=7&rm=3" alt="Accessories">
+            <div class="info">
+                <h3>ACCESSORIES</h3>
+                <p>Natural bamboo bags, jewelry, bath accessories, and decor.</p>
+                <a href="accessories.php" class="btn">View more</a>
+            </div>
+        </div>
+
+        <div class="card">
+            <img src="https://promateworld.com/storage/blog/blog-images/blog-02-01-1.jpg" alt="Kids Material">
+            <div class="info">
+                <h3>KIDS MATERIAL</h3>
+                <p>Safe bamboo toys, stationery, desks, and crafts for kids.</p>
+                <a href="kidsproduct.php" class="btn">View more</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- Pop-up Modal -->
+<div class="overlay" id="overlay"></div>
+<div class="modal" id="modal">
+    <h2>Login Required</h2>
+    <p>Please log in to book your experience.</p>
+    <button class="login-btn" onclick="redirectToLogin()">Log In</button>
+    <button class="close-btn" onclick="closeModal()">Close</button>
+</div>
+
+</body>
+</html>

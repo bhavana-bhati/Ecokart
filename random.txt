@@ -1,0 +1,294 @@
+<?php
+session_start();
+include("db_connect.php");
+
+// Check login
+$isLoggedIn = isset($_SESSION['user_id']);
+$user_id = $isLoggedIn ? $_SESSION['user_id'] : 0;
+
+// Fetch Kitchenware products
+$query = "SELECT * FROM products WHERE category='Kitchenware'";
+$result = mysqli_query($conn, $query);
+
+// Fetch wishlist products for logged-in user
+$wishlistProducts = [];
+if ($isLoggedIn) {
+    $res = mysqli_query($conn, "SELECT product_id FROM wishlist WHERE user_id=$user_id");
+    while($w = mysqli_fetch_assoc($res)) $wishlistProducts[] = $w['product_id'];
+}
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Kitchenware Products</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+<style>
+:root{ --brand:#3e5216; --page-bg:rgb(229,229,142); --card-radius:14px; --gap:22px; }
+body{ margin:0; font-family: Arial, sans-serif; background:var(--page-bg); }
+header{ position:fixed; top:0; left:0; right:0; z-index:20; display:flex; align-items:center; justify-content:space-between; background:var(--brand); color:#fff; padding:14px 18px; }
+header h1{ margin:0; font-size:20px; font-weight:700; }
+header input{ width:280px; max-width:45vw; padding:8px 10px; border-radius:8px; border:none; }
+.hamburger{ display:none; font-size:24px; background:none; border:0; color:#fff; }
+.nav-links{ list-style:none; display:flex; gap:22px; margin:0; padding:0; }
+.nav-links a{ color:#fff; text-decoration:none; padding:6px 10px; border-radius:4px; transition:background .2s,color .2s; }
+.nav-links a:hover{ background:rgba(255,255,255,.2); color:#ffd700; }
+.filters{ position:fixed; top:64px; left:-210px; z-index:10; width:200px; height:100vh; padding:18px; background:#d0cfaf; transition:left .35s ease-in-out; box-shadow: 2px 0 8px rgba(0,0,0,.08); }
+.filters:hover{ left:0; } 
+.filters h3{ margin:0 0 12px; font-size:18px; color:#333; }
+.filter-list{ list-style:none; margin:0; padding:0; }
+.filter-list li{ display:flex; align-items:center; gap:10px; margin:50px 0; font-size:16px; }
+.filter-list input[type="radio"]{ accent-color:var(--brand); }
+.main-content{ padding:96px 24px 28px; }
+.main-content h2{ text-align:center; font-size:36px; font-weight:700; margin:0 0 8px; }
+#related-container{ display:grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap:8px; padding:20px; justify-content:center; align-items:start; }
+.product-card{ width:340px; background:#fff; border-radius:var(--card-radius); box-shadow:0 4px 10px rgba(0,0,0,.18); overflow:hidden; position:relative; }
+.image-container{ position:relative; height:400px; overflow:hidden; }
+.image-container img{ width:100%; height:100%; object-fit:cover; border-radius:6px; transition: transform .4s ease; }
+.image-container::after{ content:""; position:absolute; inset:0; background:rgba(0,0,0,.5); opacity:0; transition:opacity .3s; }
+.image-container:hover::after{ opacity:1; } 
+.image-container:hover img{ transform:scale(1.05); }
+.quickview-btn{ position:absolute; top:50%; left:50%; transform:translate(-50%, -50%); font-size:26px; color:white; background:none; border:none; padding:0; opacity:0; transition:opacity .3s, transform .3s; cursor:pointer; z-index:2; }
+.image-container:hover .quickview-btn{ opacity:1; transform:translate(-50%, -50%) scale(1.1); }
+.wishlist-btn{ position:absolute; top:12px; right:12px; z-index:3; background:white; border:none; border-radius:6px; padding:4px 6px; box-shadow:0 2px 6px rgba(0,0,0,0.15); cursor:pointer; transition:transform .2s; }
+.wishlist-btn i{ font-size:18px; color:gray; transition: color .2s; }
+.wishlist-btn.active i{ color:red; }
+.wishlist-btn:hover{ transform:scale(1.1); }
+.card-body{ padding:14px 16px 16px; }
+.card-body h3{ font-size:22px; margin:6px 0 6px; }
+.card-body p{ margin:0; color:#333; font-size:16px; line-height:1.35; }
+.price{ margin-top:14px; font-size:18px; font-weight:700; color:#2f6d2f; }
+.buy-btn{ display:inline-block; margin-top:10px; padding:10px 16px; background:var(--brand); color:#fff; text-decoration:none; border-radius:8px; font-size:16px; transition:background .2s; }
+.buy-btn:hover{ background:#2e3d10; }
+@media(max-width:768px){ 
+    .nav-links{ display:none; position:absolute; top:56px; left:0; right:0; background:var(--brand); padding:10px 16px; flex-direction:column; gap:10px; } 
+    .nav-links.active{ display:flex; } 
+    .hamburger{ display:block; }
+    header input{ display:none; } 
+}
+</style>
+</head>
+<body>
+<header>
+    <h1>EcoKart Bamboo</h1>
+    <input type="text" id="searchInput" placeholder="Search bamboo products...">
+    <button class="hamburger" onclick="toggleMenu()">&#9776;</button>
+    <ul class="nav-links">
+      <li><a href="furniture.php">Furniture</a></li>
+      <li><a href="kidsproduct.php">Kids Material</a></li>
+      <li><a href="accessories.php">Accessories</a></li>
+    </ul>
+</header>
+
+<aside class="filters">
+    <h3>Filter by Price</h3>
+    <ul class="filter-list">
+      <li><input type="radio" name="price" value="all" checked> <label>All</label></li>
+      <li><input type="radio" name="price" value="under300"> <label>Under ₹300</label></li>
+      <li><input type="radio" name="price" value="300to1000"> <label>₹300–₹1000</label></li>
+      <li><input type="radio" name="price" value="above1000"> <label>Above ₹1000</label></li>
+    </ul>
+</aside>
+
+<div class="main-content">
+    <h2>Kitchenware Products</h2>
+    <div id="related-container">
+      <?php while($row = mysqli_fetch_assoc($result)): ?>
+        <div class="product-card" data-price="<?= $row['price'] ?>" data-title="<?= strtolower($row['name']) ?>" data-desc="<?= strtolower($row['description']) ?>">
+          <div class="image-container">
+            <img src="<?= $row['image'] ?>" alt="<?= $row['name'] ?>">
+            <a href="quickview.php?id=<?= $row['product_id'] ?>" class="quickview-btn"><i class="fas fa-eye"></i></a>
+            <button type="button" class="wishlist-btn <?= in_array($row['product_id'], $wishlistProducts) ? 'active' : '' ?>" data-product-id="<?= $row['product_id'] ?>">
+              <i class="fa fa-heart"></i>
+            </button>
+          </div>
+          <div class="card-body">
+            <h3><?= $row['name'] ?></h3>
+            <p><?= $row['description'] ?></p>
+            <div class="price">₹<?= $row['price'] ?></div>
+            <form method="POST" action="cart.php">
+              <input type="hidden" name="product_id" value="<?= $row['product_id'] ?>">
+              <button type="submit" class="buy-btn">Add to Cart</button>
+            </form>
+          </div>
+        </div>
+      <?php endwhile; ?>
+    </div>
+    <p id="no-results" style="display:none; text-align:center; font-size:18px; color:#555; margin-top:20px;">
+      ❌ No results found
+    </p>
+</div>
+
+<script>
+function toggleMenu(){ document.querySelector(".nav-links").classList.toggle("active"); }
+
+function filterProducts(){
+  const filter = document.querySelector('input[name="price"]:checked').value;
+  const keyword = document.getElementById("searchInput").value.toLowerCase();
+  const cards = document.querySelectorAll(".product-card");
+  let anyVisible = false;
+
+  cards.forEach(card => {
+    const price = parseFloat(card.dataset.price);
+    const title = card.dataset.title;
+    const desc = card.dataset.desc;
+
+    let matchPrice =
+      filter === "all" ||
+      (filter === "under300" && price < 300) ||
+      (filter === "300to1000" && price >= 300 && price <= 1000) ||
+      (filter === "above1000" && price > 1000);
+
+    let matchSearch = title.includes(keyword) || desc.includes(keyword);
+
+    if(matchPrice && matchSearch){
+      card.style.display = "block";
+      anyVisible = true;
+    } else {
+      card.style.display = "none";
+    }
+  });
+
+  document.getElementById("no-results").style.display = anyVisible ? "none" : "block";
+}
+
+document.querySelectorAll('input[name="price"]').forEach(radio => radio.addEventListener("change", filterProducts));
+document.getElementById("searchInput").addEventListener("input", filterProducts);
+
+// Wishlist functionality
+document.querySelectorAll(".wishlist-btn").forEach(btn => {
+    btn.addEventListener("click", () => {
+        <?php if(!$isLoggedIn): ?>
+        alert("Please login to add to wishlist!");
+        return;
+        <?php else: ?>
+        const productId = btn.dataset.productId;
+
+        fetch("wishlist_ajax.php", {
+            method: "POST",
+            headers: { "Content-Type": "application/x-www-form-urlencoded" },
+            body: "product_id=" + productId
+        })
+        .then(res => res.json())
+        .then(data => {
+            if(data.status === "added") btn.classList.add("active");
+            if(data.status === "removed") btn.classList.remove("active");
+        })
+        .catch(err => console.log(err));
+
+        // Toggle color instantly
+        btn.classList.toggle("active");
+        <?php endif; ?>
+    });
+});
+</script>
+</body>
+</html>
+ in this there are many changes that I want you to do it                                                                                1. the page checks user user is logged in or correct and give the perfect and there is ok button right so after clicking on ok button it should open login page , no wait not login there should be msg of please register first to add to wishlist. and after clicking on ok button it should open register page.                       2. after adding the product to wishlist the heart turns into red that is perfect but why after reloading the page is again grey i want it should stay same and i want the added wishlist should directly visible at wishlist page.                                                                                                                                                      3. add two nav at very last in the corner rightside of wishlist with heart icon and cart with cart icon use nave color and same css hover just like furniture, kids product, etc has                                                             4. this is my wishlist page i want both page should be linked to each other and also with user page bcoz i want to the save the wishlist item in database it is not storing                                                               <?php
+session_start();
+$conn = new mysqli("localhost","root","","bamboo");
+if($conn->connect_error) die("Connection failed: ".$conn->connect_error);
+
+if(!isset($_SESSION['user_id'])){
+    echo json_encode(['status'=>'error','msg'=>'Not logged in']);
+    exit;
+}
+
+$user_id = $_SESSION['user_id'];
+$product_id = intval($_POST['product_id']);
+
+// Check if product is already in wishlist
+$res = $conn->query("SELECT * FROM wishlist WHERE user_id=$user_id AND product_id=$product_id");
+
+if($res->num_rows > 0){
+    // Remove from wishlist
+    $conn->query("DELETE FROM wishlist WHERE user_id=$user_id AND product_id=$product_id");
+    echo json_encode(['status'=>'removed']);
+}else{
+    // Add to wishlist
+    $conn->query("INSERT INTO wishlist (user_id, product_id) VALUES ($user_id, $product_id)");
+    echo json_encode(['status'=>'added']);
+}
+
+$conn->close();
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wishlist</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+<style>
+body { font-family: Arial, sans-serif; margin:0; padding:0; background:#f5f5dc; }
+header { background:#556b2f; color:white; padding:15px; text-align:center; }
+.container { max-width: 1000px; margin:40px auto; padding:20px; background:#fffaf0; border-radius:10px; box-shadow:0 4px 10px rgba(0,0,0,0.1);}
+h1 { text-align:center; color:#556b2f; margin-bottom:20px; }
+.placeholder { text-align:center; font-size:18px; color:#666; padding:50px 0; }
+.wishlist-grid { display:grid; grid-template-columns: repeat(auto-fill,minmax(250px,1fr)); gap:20px; }
+.card { background:#fafafa; border-radius:8px; padding:10px; box-shadow:0 2px 6px rgba(0,0,0,0.1); position:relative; }
+.card img { width:100%; height:200px; object-fit:cover; border-radius:5px; }
+.card h3 { margin:10px 0 5px; color:#333; font-size:18px; }
+.card p { margin:0; font-size:14px; color:#666; }
+.card .price { font-weight:bold; color:#556b2f; margin-top:5px; }
+.card .heart { position:absolute; top:10px; right:10px; font-size:22px; cursor:pointer; color:#aaa; transition: color 0.3s; }
+.card .heart.active { color:#e74c3c; }
+.card .quick-view { display:inline-block; margin-top:10px; padding:6px 12px; background:#556b2f; color:white; border:none; border-radius:5px; cursor:pointer; font-size:14px; }
+.card .quick-view:hover { background:#3e5216; }
+</style>
+</head>
+<body>
+
+<header><h2>My Wishlist</h2></header>
+<div class="container">
+<h1>Wishlist Items</h1>
+
+<?php if(count($products) > 0): ?>
+    <div class="wishlist-grid">
+    <?php foreach($products as $prod): ?>
+        <div class="card">
+            <img src="<?= htmlspecialchars($prod['image']) ?>" alt="<?= htmlspecialchars($prod['name']) ?>">
+            <i class="fa fa-heart heart <?= in_array($prod['product_id'],$wishlist_ids)?'active':'' ?>" data-id="<?= $prod['product_id'] ?>"></i>
+            <h3><?= htmlspecialchars($prod['name']) ?></h3>
+            <p><?= htmlspecialchars($prod['description']) ?></p>
+            <p class="price">₹<?= number_format($prod['price'],2) ?></p>
+            <button class="quick-view" onclick="window.location.href='product_detail.php?id=<?= $prod['product_id'] ?>'">
+                <i class="fa fa-eye"></i> Quick View
+            </button>
+        </div>
+    <?php endforeach; ?>
+    </div>
+<?php else: ?>
+    <div class="placeholder">✨ Your wishlist is empty. Add products to see them here!</div>
+<?php endif; ?>
+</div>
+
+<script>
+const hearts = document.querySelectorAll('.heart');
+hearts.forEach(h => {
+    h.addEventListener('click', () => {
+        const pid = h.getAttribute('data-id');
+        const action = h.classList.contains('active') ? 'remove' : 'add';
+
+        fetch('wishlist.php', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            body: `product_id=${pid}&action=${action}`
+        })
+        .then(res => res.json())
+        .then(data => {
+            if(data.status === 'added') h.classList.add('active');
+            else if(data.status === 'removed') h.classList.remove('active');
+        });
+    });
+});
+</script>
+
+</body>
+</html>
+<?php
+$stmt->close();
+$conn->close();
+?>                                                                                                                                                                        5. this is my database table of wishlist product user                                                                               

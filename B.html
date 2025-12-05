@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Related Products</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <style>
+    .filters {
+      width: 220px;
+      background: #eae9d1;
+      padding: 20px;
+      height: 100vh;
+      position: fixed;
+      top: 64px;
+      left: -200px;
+      transition: left 0.4s ease-in-out;
+      z-index: 10;
+    }
+
+    .filters:hover {
+      left: 0;
+    }
+
+    .filters h3 {
+      margin-bottom: 10px;
+      font-size: 18px;
+      color: #333;
+    }
+
+    .filters label {
+      display: block;
+      margin-bottom: 10px;
+      font-size: 14px;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Arial', sans-serif;
+    }
+
+    .main-content {
+      margin-left: 0;
+      padding-left: 240px; /* space for hover sidebar */
+    }
+  </style>
+</head>
+
+<body class="bg-gray-100">
+  <!-- Header -->
+  <header class="bg-green-800 text-white px-4 py-4 flex justify-between items-center fixed top-0 w-full z-20">
+    <h1 class="text-xl font-bold">EcoKart Bamboo</h1>
+    <input type="text" id="searchInput" placeholder="Search bamboo products..." class="px-3 py-1 rounded text-black w-64">
+  </header>
+
+  <!-- Sidebar Filter -->
+  <aside class="filters">
+    <h3>Filter by Price</h3>
+    <label><input type="radio" name="price" value="all" checked> All</label>
+    <label><input type="radio" name="price" value="low"> Under ₹500</label>
+    <label><input type="radio" name="price" value="mid"> ₹500–₹1000</label>
+    <label><input type="radio" name="price" value="high"> Above ₹1000</label>
+  </aside>
+
+  <!-- Main Content -->
+  <div class="main-content pt-24 px-6">
+    <h2 class="text-2xl font-semibold mb-6">Related Products</h2>
+    <div id="related-container" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6"></div>
+  </div>
+
+  <script>
+    const products = [
+      {
+        title: "Bamboo Serving Tray",
+        description: "Eco-friendly tray perfect for serving meals or snacks.",
+        image: "https://i.etsystatic.com/26797273/r/il/1112ec/3132233517/il_1140xN.3132233517_gw31.jpg",
+        price: 450,
+        quickview: "quickview/bowl.html",
+        buynow: "buynow/checkbox"
+      },
+      {
+        title: "Bamboo Fork",
+        description: "Elegant bamboo chair, sturdy and comfortable.",
+        image: "https://cf.shopee.ph/file/sg-11134201-22110-u3ig3outo3jvf1",
+        price: 1200,
+        quickview: "quickview/bowl.html",
+        buynow: "buynow/checkbox"
+      },
+      {
+        title: "Bamboo Bowls",
+        description: "Lightweight, eco-safe bamboo bowl.",
+        image: "https://m.media-amazon.com/images/I/71QhQDRtDgL.jpg",
+        price: 320,
+        quickview: "quickview/bowl.html",
+        buynow: "buynow/checkbox"
+      },
+      {
+        title: "Bamboo Plates",
+        description: "Stylish set of pens made from real bamboo.",
+        image: "https://www.restaurantware.com/cdn/shop/files/BNRW0146-1-LR.jpg?v=1728048626",
+        price: 250,
+        quickview: "quickview/bowl.html",
+        buynow: "buynow/checkbox"
+      }
+    ];
+
+    const relatedContainer = document.getElementById("related-container");
+
+    function displayProducts(filter = "all", keyword = "") {
+      relatedContainer.innerHTML = "";
+      const filtered = products.filter(p => {
+        const matchesPrice =
+          (filter === "low" && p.price < 500) ||
+          (filter === "mid" && p.price >= 500 && p.price <= 1000) ||
+          (filter === "high" && p.price > 1000) ||
+          filter === "all";
+
+        const matchesSearch = p.title.toLowerCase().includes(keyword.toLowerCase()) ||
+          p.description.toLowerCase().includes(keyword.toLowerCase());
+
+        return matchesPrice && matchesSearch;
+      });
+
+      filtered.forEach(product => {
+        const card = document.createElement("div");
+        card.className = "bg-white rounded-lg shadow-md overflow-hidden relative group";
+
+        card.innerHTML = `
+          <div class="relative">
+            <img src="${product.image}" alt="${product.title}" class="w-full h-48 width:100px rounded-t">
+            <a href="${product.quickview}" class="absolute inset-0 flex items-center justify-center bg-black bg-opacity-0 group-hover:bg-opacity-50 transition duration-300 ">
+              <i class="fas fa-eye text-white text-xl opacity-0 group-hover:opacity-100"></i>
+            </a>
+            <button class="absolute top-2 right-2 bg-white p-1 rounded-full shadow wishlist-btn" onclick="toggleWishlist(this)">
+              <i class="fa fa-heart text-gray-500"></i>
+            </button>
+            <div class="absolute top-12 right-2 wishlist-toast hidden bg-pink-500 text-white text-xs px-2 py-1 rounded shadow">
+              Added to Wishlist
+            </div>
+          </div>
+          <div class="p-4">
+            <h3 class="text-lg font-semibold">${product.title}</h3>
+            <p class="text-sm text-gray-600">${product.description}</p>
+            <div class="text-green-600 font-semibold mt-1">₹${product.price}</div>
+            <a href="${product.buynow}" class="inline-block mt-3 px-4 py-2 bg-green-600 text-white text-sm rounded hover:bg-green-700 transition">Buy Now</a>
+          </div>
+        `;
+
+        relatedContainer.appendChild(card);
+      });
+    }
+
+    function toggleWishlist(button) {
+      const icon = button.querySelector("i");
+      const toast = button.nextElementSibling;
+      const added = icon.classList.toggle("text-red-500");
+
+      toast.textContent = added ? "Added to Wishlist" : "Removed from Wishlist";
+      toast.classList.remove("hidden");
+      setTimeout(() => toast.classList.add("hidden"), 1500);
+    }
+
+    document.querySelectorAll('input[name="price"]').forEach(radio => {
+      radio.addEventListener("change", () => {
+        displayProducts(radio.value, document.getElementById("searchInput").value);
+      });
+    });
+
+    document.getElementById("searchInput").addEventListener("input", function () {
+      const selectedPrice = document.querySelector('input[name="price"]:checked').value;
+      displayProducts(selectedPrice, this.value);
+    });
+
+    displayProducts();
+  </script>
+</body>
+
+</html>

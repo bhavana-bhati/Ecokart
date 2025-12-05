@@ -1,0 +1,432 @@
+/* Carousel Section */
+        .carousel-section {
+            padding: 50px 0;
+            background-color: var(--white);
+            margin-bottom: 50px;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 40px;
+            font-size: 32px;
+            color: var(--dark-color);
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 100px;
+            height: 3px;
+            background-color: var(--primary-color);
+            margin: 15px auto 0;
+        }
+
+        .carousel {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .carousel-container {
+            display: flex;
+            transition: transform 0.5s ease;
+            gap: 20px;
+            padding-bottom: 10px;
+        }
+
+        .carousel-item {
+            min-width: calc(33.333% - 13.333px);
+            background-color: var(--white);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .carousel-item:hover {
+            transform: translateY(-10px);
+        }
+
+        .carousel-img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+
+        .carousel-content {
+            padding: 20px;
+        }
+
+        .carousel-title {
+            font-size: 18px;
+            margin-bottom: 10px;
+            color: var(--dark-color);
+        }
+
+        .carousel-price {
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+
+        .stock-indicator {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            font-size: 14px;
+        }
+
+        .stock-indicator .in-stock {
+            color: #28a745;
+            margin-right: 5px;
+        }
+
+        .stock-indicator .low-stock {
+            color: #ffc107;
+            margin-right: 5px;
+        }
+
+        .stock-indicator .out-of-stock {
+            color: #dc3545;
+            margin-right: 5px;
+        }
+
+        .add-to-cart {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background-color: var(--primary-color);
+            color: var(--white);
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: var(--transition);
+            font-weight: 500;
+        }
+
+        .add-to-cart:hover {
+            background-color: var(--dark-color);
+        }
+
+        .carousel-nav {
+            display: flex;
+            justify-content: center;
+            margin-top: 30px;
+        }
+
+        .carousel-nav button {
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: var(--primary-color);
+            margin: 0 15px;
+            transition: var(--transition);
+        }
+
+        .carousel-nav button:hover {
+            color: var(--dark-color);
+        }
+
+        /* Products Section */
+        .products-section {
+            padding: 50px 0;
+            background-color: var(--white);
+            margin-bottom: 50px;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .product-card {
+            background-color: var(--white);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .product-img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .product-content {
+            padding: 20px;
+        }
+
+        .product-title {
+            font-size: 18px;
+            margin-bottom: 10px;
+            color: var(--dark-color);
+        }
+
+        .product-price {
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+
+        .product-description {
+            font-size: 14px;
+            margin-bottom: 15px;
+            color: #666;
+        }
+
+        .product-actions {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .product-btn {
+            padding: 8px 15px;
+            border-radius: 5px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .add-cart {
+            background-color: var(--primary-color);
+            color: var(--white);
+            border: none;
+        }
+
+        .add-cart:hover {
+            background-color: var(--dark-color);
+        }
+
+        .view-details {
+            background-color: transparent;
+            border: 1px solid var(--primary-color);
+            color: var(--primary-color);
+        }
+
+        .view-details:hover {
+            background-color: var(--primary-color);
+            color: var(--white);
+        }
+<!-- Carousel Section -->
+    <section class="carousel-section">
+        <div class="container">
+            <h2 class="section-title">Featured Products</h2>
+            <div class="carousel">
+                <div class="carousel-container">
+                    <div class="carousel-item">
+                        <img src="https://placehold.co/400x300" alt="Bamboo toothbrush set in natural colors with charcoal bristles" class="carousel-img">
+                        <div class="carousel-content">
+                            <h3 class="carousel-title">Bamboo Toothbrush Set</h3>
+                            <div class="carousel-price">$12.99</div>
+                            <div class="stock-indicator">
+                                <i class="fas fa-check-circle in-stock"></i>
+                                <span>In Stock (25 available)</span>
+                            </div>
+                            <button class="add-to-cart">Add to Cart</button>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <img src="https://placehold.co/400x300" alt="Bamboo cutting board with juice groove and eco-friendly packaging" class="carousel-img">
+                        <div class="carousel-content">
+                            <h3 class="carousel-title">Bamboo Cutting Board</h3>
+                            <div class="carousel-price">$24.99</div>
+                            <div class="stock-indicator">
+                                <i class="fas fa-exclamation-circle low-stock"></i>
+                                <span>Low Stock (5 available)</span>
+                            </div>
+                            <button class="add-to-cart">Add to Cart</button>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <img src="https://placehold.co/400x300" alt="Stainless steel reusable straws with bamboo case and cleaning brush" class="carousel-img">
+                        <div class="carousel-content">
+                            <h3 class="carousel-title">Bamboo Straw Set</h3>
+                            <div class="carousel-price">$15.99</div>
+                            <div class="stock-indicator">
+                                <i class="fas fa-check-circle in-stock"></i>
+                                <span>In Stock (42 available)</span>
+                            </div>
+                            <button class="add-to-cart">Add to Cart</button>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <img src="https://placehold.co/400x300" alt="Bamboo utensil set with travel pouch including fork, spoon, knife and chopsticks" class="carousel-img">
+                        <div class="carousel-content">
+                            <h3 class="carousel-title">Bamboo Utensil Set</h3>
+                            <div class="carousel-price">$19.99</div>
+                            <div class="stock-indicator">
+                                <i class="fas fa-times-circle out-of-stock"></i>
+                                <span>Out of Stock</span>
+                            </div>
+                            <button class="add-to-cart" disabled>Notify Me</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-nav">
+                    <button id="prevBtn"><i class="fas fa-chevron-left"></i></button>
+                    <button id="nextBtn"><i class="fas fa-chevron-right"></i></button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section class="products-section">
+        <div class="container">
+            <h2 class="section-title">Our Bamboo Collection</h2>
+            <div class="products-grid">
+                <div class="product-card">
+                    <img src="https://placehold.co/400x300" alt="Bamboo sunglasses with polarized lenses and biodegradable case" class="product-img">
+                    <div class="product-content">
+                        <h3 class="product-title">Bamboo Sunglasses</h3>
+                        <div class="product-price">$39.99</div>
+                        <p class="product-description">Polarized bamboo frame sunglasses with UV 400 protection and biodegradable case.</p>
+                        <div class="product-actions">
+                            <button class="product-btn add-cart">Add to Cart</button>
+                            <button class="product-btn view-details">Details</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <img src="https://placehold.co/400x300" alt="Bamboo phone case for iPhone with minimalist design" class="product-img">
+                    <div class="product-content">
+                        <h3 class="product-title">Bamboo Phone Case</h3>
+                        <div class="product-price">$27.99</div>
+                        <p class="product-description">Eco-friendly bamboo phone case with shock absorption and precise cutouts.</p>
+                        <div class="product-actions">
+                            <button class="product-btn add-cart">Add to Cart</button>
+                            <button class="product-btn view-details">Details</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <img src="https://placehold.co/400x300" alt="Bamboo desk organizer with compartments for stationery" class="product-img">
+                    <div class="product-content">
+                        <h3 class="product-title">Bamboo Desk Organizer</h3>
+                        <div class="product-price">$34.99</div>
+                        <p class="product-description">Minimalist bamboo desk organizer with multiple compartments for all your stationery.</p>
+                        <div class="product-actions">
+                            <button class="product-btn add-cart">Add to Cart</button>
+                            <button class="product-btn view-details">Details</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <img src="https://placehold.co/400x300" alt="Bamboo watch with minimalist face and interchangeable straps" class="product-img">
+                    <div class="product-content">
+                        <h3 class="product-title">Bamboo Watch</h3>
+                        <div class="product-price">$49.99</div>
+                        <p class="product-description">Sustainable bamboo watch featuring minimalist design and water resistance.</p>
+                        <div class="product-actions">
+                            <button class="product-btn add-cart">Add to Cart</button>
+                            <button class="product-btn view-details">Details</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// 📁 Backend - server.js (updated with product details route)
+const express = require('express');
+const mongoose = require('mongoose');
+const cors = require('cors');
+const Product = require('./models/Product');
+const User = require('./models/User');
+
+const app = express();
+app.use(cors());
+app.use(express.json());
+
+mongoose.connect('mongodb://localhost:27017/bambooshop', {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+});
+
+// Get all products or by category or price range
+app.get('/api/products', async (req, res) => {
+    const { category, min, max } = req.query;
+    const query = {};
+    if (category) query.category = category;
+    if (min && max) query.price = { $gte: min, $lte: max };
+
+    const products = await Product.find(query);
+    res.json(products);
+});
+
+// Get product by ID (for product detail page)
+app.get('/api/products/:id', async (req, res) => {
+    try {
+        const product = await Product.findById(req.params.id);
+        const related = await Product.find({
+            category: product.category,
+            _id: { $ne: req.params.id }
+        }).limit(4);
+        res.json({ product, related });
+    } catch (error) {
+        res.status(404).json({ error: 'Product not found' });
+    }
+});
+
+// User authentication routes
+app.post('/api/auth/register', async (req, res) => {
+    const user = new User(req.body);
+    await user.save();
+    res.json(user);
+});
+
+app.post('/api/auth/login', async (req, res) => {
+    const user = await User.findOne({ email: req.body.email, password: req.body.password });
+    if (user) res.json(user);
+    else res.status(401).json({ error: 'Invalid credentials' });
+});
+
+app.listen(5000, () => console.log('Server running on port 5000'));
+
+// 📁 models/Product.js
+const mongoose = require('mongoose');
+const productSchema = new mongoose.Schema({
+    name: String,
+    category: String,
+    price: Number,
+    discount: Number,
+    rating: Number,
+    image: String,
+    description: String
+});
+module.exports = mongoose.model('Product', productSchema);
+
+// 📁 models/User.js
+const mongoose = require('mongoose');
+const userSchema = new mongoose.Schema({
+    name: String,
+    email: String,
+    password: String
+});
+module.exports = mongoose.model('User', userSchema);

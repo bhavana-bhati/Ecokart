@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bamboo Bowl</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+</head>
+
+<body class="bg-gray-50 text-gray-900 font-sans">
+<main class="max-w-6xl mx-auto p-6 md:p-10">
+
+  <!-- Product Main Section -->
+  <section class="flex flex-col md:flex-row gap-8 md:gap-12">
+    <div class="flex-shrink-0 w-full md:w-96 aspect-square bg-gray-100 rounded-lg overflow-hidden shadow-md relative">
+      <img src= "https://m.media-amazon.com/images/I/71QhQDRtDgL.jpg",
+           alt="Product display image"
+           class="object-contain w-full h-full"
+           onerror="this.onerror=null;this.src='https://i.etsystatic.com/26797273/r/il/1112ec/3132233517/il_1140xN.3132233517_gw31.jpg';" />
+      <div class="absolute top-4 right-4">
+        <button class="wishlist-btn" onclick="toggleWishlist(this)">
+          <i class="fa fa-heart"></i>
+        </button>
+      </div>
+    </div>
+
+    <div class="flex flex-col flex-grow justify-start">
+      <h1 class="text-3xl font-semibold mb-3 border-b pb-2">Bamboo Bowl</h1>
+      <p class="text-gray-700 mb-5 leading-relaxed border-b pb-4">
+      This handcrafted bamboo bowl from India combines tradition with sustainability.
+Lightweight, eco‑friendly, and naturally antibacterial — perfect for everyday meals and festive serving
+      </p>
+
+      <div class="mb-5 border-b pb-4">
+        <p class="text-xl font-semibold">MRP: Rs. 499.00</p>
+        <p class="text-sm text-gray-500 italic">Inclusive of all taxes</p>
+      </div>
+
+      <div class="mb-6">
+        <label class="block font-medium mb-1">Quantity:</label>
+        <div class="inline-flex items-center border border-gray-400 rounded">
+          <button type="button" id="decreaseQty" class="px-3 py-1 border-r border-gray-400 text-lg text-gray-700 w-10">-</button>
+          <div id="quantityDisplay" class="px-4 py-1 text-lg text-center w-12">1</div>
+          <button type="button" id="increaseQty" class="px-3 py-1 border-l border-gray-400 text-lg text-gray-700 w-10">+</button>
+        </div>
+        <p class="mt-2 text-gray-800 font-medium" id="subtotalText">Subtotal: Rs. 499.00</p>
+      </div>
+
+      <div class="flex flex-wrap items-center gap-3">
+        <button id="addCartBtn" class="px-6 py-2 bg-blue-600 text-white rounded shadow hover:bg-blue-700 font-semibold">
+          Add to Cart
+        </button>
+        <button id="buyNowBtn" class="px-6 py-2 bg-[#3e5216] text-white rounded shadow hover:bg-green-700 font-semibold">
+          Buy Now
+        </button>
+        <button id="shareBtn" class="icon-btn text-2xl ml-2 text-gray-700" title="Share Product" type="button">
+          📢
+        </button>
+      </div>
+    </div>
+  </section>
+
+    <h2 class="text-2xl font-semibold mb-4">Detailed Description</h2>
+    <p id="productDescription" class="text-gray-700 leading-relaxed max-w-4xl overflow-hidden max-h-32 transition-all duration-500 ease-in-out">
+<strong>Origin</strong><br>
+  Bamboo plates have been traditionally handcrafted in India, especially in the North‑East states like Assam, Nagaland, and Tripura, where bamboo grows abundantly. Used during community feasts, temple offerings, and festive celebrations, they combine heritage with modern eco‑friendly living.
+  <br><br>
+  
+  <strong>Key Benefits</strong><br>
+  ✅ Eco‑Friendly & Renewable – Made from sustainably harvested Indian bamboo.<br>
+  ✅ Durable & Lightweight – Strong yet easy to handle.<br>
+  ✅ Naturally Antibacterial – Helps keep food fresh and safe.<br>
+  ✅ Chemical‑Free – Free from harmful coatings or plastics.<br>
+  ✅ Cultural Heritage – Showcases India’s traditional craftsmanship.<br><br>
+  
+  <strong>Crafting Process</strong><br>
+  Indian artisans harvest mature bamboo, clean and treat it naturally, then shape it into plates using hand tools or simple machinery. Each plate is sun‑dried, finely sanded, and polished with food‑safe oils, preserving its natural texture while ensuring durability and reusability.
+</p>
+
+
+<button id="readMoreBtn" class="mt-3 text-blue-600 hover:underline font-medium">Read More</button>
+
+</section>
+
+  <!-- Reviews -->
+  <section class="mt-16 border-t pt-8">
+    <h2 class="text-2xl font-semibold mb-4">Reviews</h2>
+    <div class="max-w-4xl space-y-6">
+      <article class="bg-white p-4 rounded shadow">
+        <p class="font-semibold">John Doe</p>
+        <p class="text-yellow-500 mb-1">★★★★☆</p>
+        <p class="text-gray-700">Really liked the product...</p>
+      </article>
+      <article class="bg-white p-4 rounded shadow">
+        <p class="font-semibold">Jane Smith</p>
+        <p class="text-yellow-500 mb-1">★★★★★</p>
+        <p class="text-gray-700">Exceeded my expectations...</p>
+      </article>
+    </div>
+  </section>
+
+  <!-- Related Products Section -->
+  <section class="mt-16 border-t pt-8">
+    <h2 class="text-2xl font-semibold mb-4">Related Products</h2>
+    <div id="related-container" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+      <!-- Related products will be injected here -->
+    </div>
+  </section>
+
+</main>
+
+<script>
+  const pricePerItem = 499.00;
+  const qtyDisplay = document.getElementById('quantityDisplay');
+  const subtotalText = document.getElementById('subtotalText');
+  const increaseBtn = document.getElementById('increaseQty');
+  const decreaseBtn = document.getElementById('decreaseQty');
+  const addCartBtn = document.getElementById('addCartBtn');
+  const buyNowBtn = document.getElementById('buyNowBtn');
+  let quantity = 1;
+
+  function updateSubtotal() {
+    const subtotal = (quantity * pricePerItem).toFixed(2);
+    subtotalText.textContent = `Subtotal: Rs. ${subtotal}`;
+    qtyDisplay.textContent = quantity;
+  }
+
+  increaseBtn.addEventListener("click", () => {
+    quantity++;
+    updateSubtotal();
+  });
+
+  decreaseBtn.addEventListener("click", () => {
+    if (quantity > 1) {
+      quantity--;
+      updateSubtotal();
+    }
+  });
+
+  addCartBtn.addEventListener('click', () => {
+    alert(`Added ${quantity} item(s) to cart. Total: Rs. ${(quantity * pricePerItem).toFixed(2)}`);
+  });
+
+  buyNowBtn.addEventListener('click', () => {
+    alert(`Proceeding to buy ${quantity} item(s) for Rs. ${(quantity * pricePerItem).toFixed(2)}`);
+  });
+
+
+// Get references to elements
+const readMoreBtn = document.getElementById("readMoreBtn");
+const productDescription = document.getElementById("productDescription");
+let expanded = false;
+
+readMoreBtn.addEventListener("click", () => {
+  expanded = !expanded;
+  if (expanded) {
+    productDescription.classList.remove("max-h-32", "overflow-hidden");
+    productDescription.classList.add("max-h-[500px]"); // allow more height
+    readMoreBtn.textContent = "Read Less";
+  } else {
+    productDescription.classList.remove("max-h-[500px]");
+    productDescription.classList.add("max-h-32", "overflow-hidden");
+    readMoreBtn.textContent = "Read More";
+  }
+});
+
+
+
+
+  const related = [
+    {
+      title: "Bamboo Tray",
+      price: 699,
+      img: "https://i.etsystatic.com/26797273/r/il/1112ec/3132233517/il_1140xN.3132233517_gw31.jpg",
+      quickView: "quick-view/Bamboo Spoon.html",
+      buynow: "buynowbutton/checkbox",
+      description: "Eco-friendly bamboo spoon, perfect for daily use."
+    },
+    {
+      title: "Wooden Fork",
+      price: 1000,
+      quickView: "quick-view/Wooden Fork.html",
+     img: "https://down-ph.img.susercontent.com/file/ph-11134207-7qul7-lfuvti0v4ebc57",
+      buynow: "buynowbutton/checkbox",
+      description: "Durable and sustainable wooden fork."
+    },
+    {
+      title: "Eco Plate",
+      price: 599,
+      img: "https://www.restaurantware.com/cdn/shop/files/BNRW0146-1-LR.jpg?v=1728048626",
+      quickView: "quick-view/Eco Plate.html",
+      buynow: "buynowbutton/checkbox",
+      description: "Reusable eco-plate made from natural materials."
+    }
+  ];
+
+  const relatedContainer = document.getElementById("related-container");
+
+  related.forEach(product => {
+    const card = document.createElement("div");
+    card.className = "related-card bg-white rounded-lg shadow-md p-4 relative group overflow-hidden";
+
+    card.innerHTML = `
+      <div class="relative">
+        <img src="${product.img}" alt="${product.title}" class="w-full h-48 object-cover rounded">
+        <div class="absolute inset-0 flex items-center justify-center bg-black bg-opacity-0 group-hover:bg-opacity-50 transition duration-300 ease-in-out">
+          <a href="${product.quickView}" title="Quick View" class="text-white text-2xl opacity-0 group-hover:opacity-100 transition duration-300">
+            <i class="fas fa-eye"></i>
+            <span class="ml-2 text-sm">Quick View</span>
+          </a>
+        </div>
+        <button class="absolute top-2 right-2 bg-white p-1 rounded-full shadow wishlist-btn" onclick="toggleWishlist(this)">
+          <i class="fa fa-heart text-gray-500"></i>
+        </button>
+        <div class="absolute top-12 right-2 wishlist-toast hidden bg-pink-500 text-white text-xs px-2 py-1 rounded shadow">
+          Added to Wishlist
+        </div>
+      </div>
+      <div class="mt-4">
+        <h3 class="text-lg font-semibold">${product.title}</h3>
+        <p class="text-sm text-gray-600">${product.description}</p>
+        <div class="text-green-600 font-semibold mt-1">₹${product.price}</div>
+        <a href="${product.buynow}" class="inline-block mt-3 px-4 py-2 bg-[#3e5216] text-white text-sm rounded hover:bg-green-700 transition">Buy Now</a>
+      </div>
+    `;
+
+    relatedContainer.appendChild(card);
+  });
+
+  function toggleWishlist(button) {
+    const icon = button.querySelector("i");
+    const toast = button.nextElementSibling;
+    const added = icon.classList.toggle("text-red-500");
+
+    toast.textContent = added ? "Added to Wishlist" : "Removed from Wishlist";
+    toast.classList.remove("hidden");
+    setTimeout(() => toast.classList.add("hidden"), 1500);
+  }
+</script>
+</body>
+</html>

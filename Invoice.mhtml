@@ -1,0 +1,95 @@
+From: <Saved by Blink>
+Snapshot-Content-Location: http://localhost/ecokart/invoice.php?order_id=8
+Subject: Invoice
+Date: Thu, 2 Oct 2025 21:20:02 +0530
+MIME-Version: 1.0
+Content-Type: multipart/related;
+	type="text/html";
+	boundary="----MultipartBoundary--92c5OkDWAy4qrzDeYkAsFlxOVEeRYHj7gNxgcV549O----"
+
+
+------MultipartBoundary--92c5OkDWAy4qrzDeYkAsFlxOVEeRYHj7gNxgcV549O----
+Content-Type: text/html
+Content-ID: <frame-665AEC62005095BE39F4F82F1F17A62B@mhtml.blink>
+Content-Transfer-Encoding: quoted-printable
+Content-Location: http://localhost/ecokart/invoice.php?order_id=8
+
+<!DOCTYPE html><html lang=3D"en"><head><meta http-equiv=3D"Content-Type" co=
+ntent=3D"text/html; charset=3DUTF-8"><link rel=3D"stylesheet" type=3D"text/=
+css" href=3D"cid:css-d3d805c7-20d7-49ca-a317-01fc1e20474c@mhtml.blink" />
+
+<title>Invoice</title>
+
+</head>
+<body>
+<div class=3D"invoice-box">
+    <div class=3D"header">
+        <h2>=F0=9F=A7=BE Invoice</h2>
+        <p><strong>Date:</strong> 02 Oct 2025</p>
+    </div>
+
+    <h3>Customer Info</h3>
+    <p><strong>Name:</strong> Bhavana Bhati</p>
+    <p><strong>Phone:</strong> 9970082256</p>
+    <p><strong>Address:</strong> </p>
+
+    <h3>Order Details</h3>
+    <table>
+        <tbody><tr>
+            <th>Product</th>
+            <th>Qty</th>
+            <th>Price</th>
+            <th>Subtotal</th>
+        </tr>
+                <tr>
+            <td>Bamboo Dining Table</td>
+            <td>1</td>
+            <td>=E2=82=B915000.00</td>
+            <td>=E2=82=B915000.00</td>
+        </tr>
+                <tr class=3D"total">
+            <td colspan=3D"3">Grand Total</td>
+            <td>=E2=82=B915000</td>
+        </tr>
+    </tbody></table>
+
+    <p><strong>Payment Method:</strong> Cash on Delivery</p>
+
+    <button>=F0=9F=96=A8 Print / Save PDF</button>
+    <button>=E2=86=90 Continue Shopping</button>
+</div>
+
+
+</body></html>
+------MultipartBoundary--92c5OkDWAy4qrzDeYkAsFlxOVEeRYHj7gNxgcV549O----
+Content-Type: text/css
+Content-Transfer-Encoding: quoted-printable
+Content-Location: cid:css-d3d805c7-20d7-49ca-a317-01fc1e20474c@mhtml.blink
+
+@charset "utf-8";
+
+body { font-family: Arial, sans-serif; background: rgb(245, 245, 220); marg=
+in: 0px; padding: 20px; }
+
+.invoice-box { max-width: 800px; margin: auto; background: rgb(255, 255, 25=
+5); padding: 30px; border-radius: 12px; box-shadow: rgba(0, 0, 0, 0.1) 0px =
+4px 10px; }
+
+h2 { color: olive; text-align: center; }
+
+table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+
+table, th, td { border: 1px solid rgb(221, 221, 221); }
+
+th, td { padding: 10px; text-align: center; }
+
+.total { font-weight: bold; }
+
+.header { display: flex; justify-content: space-between; align-items: cente=
+r; }
+
+button { margin-top: 20px; padding: 10px 16px; border: none; border-radius:=
+ 6px; background: olive; color: white; cursor: pointer; }
+
+button:hover { background: darkolivegreen; }
+------MultipartBoundary--92c5OkDWAy4qrzDeYkAsFlxOVEeRYHj7gNxgcV549O------

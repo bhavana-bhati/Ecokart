@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Product Page</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    .related-products {
+      scroll-snap-type: x mandatory;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+    .related-product-card {
+      scroll-snap-align: start;
+      min-width: 220px;
+    }
+    .icon-btn:hover {
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body class="bg-gray-50 text-gray-900 font-sans">
+  <main class="max-w-6xl mx-auto p-6 md:p-10">
+
+    <!-- Product Main Section -->
+
+    <section class="flex flex-col md:flex-row gap-8 md:gap-12">
+      <!-- Product Image -->
+      <div class="flex-shrink-0 w-full md:w-96 aspect-square bg-gray-100 rounded-lg overflow-hidden shadow-md">
+        <img src="https://placehold.co/400x400?text=Product+Image" 
+             alt="Product display image" 
+             class="object-contain w-full h-full" 
+             onerror="this.onerror=null;this.src='https://placehold.co/400x400/png?text=Image+Unavailable';"/>
+      </div>
+
+      <!-- Product Info -->
+      <div class="flex flex-col flex-grow justify-start">
+        <h1 class="text-3xl font-semibold mb-3 border-b pb-2">Product Title</h1>
+        <p class="text-gray-700 mb-5 leading-relaxed border-b pb-4">
+          Product information describing the key features and highlights.
+        </p>
+
+        <div class="mb-5 border-b pb-4">
+          <p class="text-xl font-semibold">MRP: Rs. 180.00</p>
+          <p class="text-sm text-gray-500 italic">Inclusive of all taxes</p>
+        </div>
+
+        <div class="mb-6">
+          <label for="quantity" class="block font-medium mb-1">Quantity:</label>
+          <div class="inline-flex items-center border border-gray-400 rounded">
+            <button type="button" id="decreaseQty" class="px-3 py-1 border-r border-gray-400 text-lg text-gray-700 w-10">-</button>
+            <div id="quantityDisplay" class="px-4 py-1 text-lg text-center w-12">1</div>
+            <button type="button" id="increaseQty" class="px-3 py-1 border-l border-gray-400 text-lg text-gray-700 w-10">+</button>
+          </div>
+          <p class="mt-2 text-gray-800 font-medium" id="subtotalText">Subtotal: Rs. 180.00</p>
+        </div>
+
+        <div class="flex flex-wrap items-center gap-3">
+          <button id="addCartBtn" class="px-6 py-2 bg-blue-600 text-white rounded shadow hover:bg-blue-700 font-semibold">
+            Add Cart
+          </button>
+          <button id="buyNowBtn" class="px-6 py-2 bg-green-600 text-white rounded shadow hover:bg-green-700 font-semibold">
+            Buy Now
+          </button>
+          <button id="wishlistBtn" class="icon-btn text-2xl ml-4 text-gray-700" title="Add to Wishlist" type="button">
+            ♡
+          </button>
+          <button id="shareBtn" class="icon-btn text-2xl ml-2 text-gray-700" title="Share Product" type="button">
+            📢
+          </button>
+        </div>
+      </div>
+    </section>
+
+<!-- Detailed Description -->
+    <section class="mt-16 border-t pt-8">
+      <h2 class="text-2xl font-semibold mb-4">Detailed Description</h2>
+      <p class="text-gray-700 leading-relaxed max-w-4xl">
+        This section contains an in-depth, detailed description of the product.
+      </p>
+    </section>
+
+    <!-- Reviews -->
+    <section class="mt-16 border-t pt-8">
+      <h2 class="text-2xl font-semibold mb-4">Reviews</h2>
+      <div class="max-w-4xl space-y-6">
+        <article class="bg-white p-4 rounded shadow">
+          <p class="font-semibold">John Doe</p>
+          <p class="text-yellow-500 mb-1">★★★★☆</p>
+          <p class="text-gray-700">Really liked the product...</p>
+        </article>
+        <article class="bg-white p-4 rounded shadow">
+          <p class="font-semibold">Jane Smith</p>
+          <p class="text-yellow-500 mb-1">★★★★★</p>
+          <p class="text-gray-700">Exceeded my expectations...</p>
+        </article>
+      </div>
+    </section>
+
+
+    <!-- Related Products -->
+<section class="mt-16 border-t pt-8">
+  <h2 class="text-2xl font-semibold mb-6">Related Products</h2>
+  <div class="related-products flex gap-6 no-scrollbar overflow-x-auto">
+    <script>
+      const related = [
+        { 
+          title: "Bamboo Spoon", 
+          price: 120, 
+          img: "https://i.pinimg.com/originals/57/4f/e4/574fe40386e8a03274506dca9a385aa6.jpg",
+          quickView: "bamboo-spoon.html"
+        },
+        { 
+          title: "Wooden Fork", 
+          price: 150, 
+          img: "https://i.pinimg.com/originals/67/f9/bc/67f9bc02d5d8e1e0490d4c5f8e319c6d.jpg",
+          quickView: "wooden-fork.html"
+        },
+        { 
+          title: "Eco Plate", 
+          price: 200, 
+          img: "https://i.pinimg.com/originals/7c/8e/6e/7c8e6e7b1c416a0a33f20e938f5b6212.jpg",
+          quickView: "eco-plate.html"
+        }
+      ];
+
+      document.write(related.map(product => `
+        <div class="related-product-card bg-white rounded-lg shadow-md p-4 w-60 relative group overflow-hidden">
+          <div class="relative">
+            <img src="${product.img}" alt="${product.title}" class="w-full h-40 object-contain rounded" />
+            <div class="absolute inset-0 flex items-start justify-end p-2 opacity-0 group-hover:opacity-100 transition-opacity">
+              <button onclick="location.href='${product.quickView}'" 
+                      class="bg-white p-2 rounded-full shadow hover:bg-gray-100 mr-2" 
+                      title="Quick View">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-grey-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5s8.268 2.943 9.542 7c-1.274 4.057-5.065 7-9.542 7s-8.268-2.943-9.542-7z" />
+                </svg>
+              </button>
+              <button onclick="toggleWishlist(this)" 
+                      class="bg-white p-2 rounded-full shadow hover:bg-gray-100 text-xl text-gray-500 hover:text-red-500" 
+                      title="Wishlist">
+                ♡
+              </button>
+            </div>
+          </div>
+          <h3 class="text-lg font-semibold mt-3">${product.title}</h3>
+          <p class="text-gray-700 mb-3">Rs. ${product.price}</p>
+          <div class="flex justify-between items-center">
+            <button onclick="location.href='${product.quickView}'" class="bg-green-600 text-white text-sm px-3 py-1 rounded hover:bg-green-700">Buy Now</button>
+            <span class="invisible">♡</span>
+          </div>
+        </div>
+      `).join(''));
+    </script>
+  </div>
+</section>
+
+        
+
+  <script>
+    const pricePerItem = 180.00;
+    const qtyDisplay = document.getElementById('quantityDisplay');
+    const subtotalText = document.getElementById('subtotalText');
+    const increaseBtn = document.getElementById('increaseQty');
+    const decreaseBtn = document.getElementById('decreaseQty');
+    const addCartBtn = document.getElementById('addCartBtn');
+    const buyNowBtn = document.getElementById('buyNowBtn');
+    let quantity = 1;
+
+    function updateSubtotal() {
+      const subtotal = (quantity * pricePerItem).toFixed(2);
+      subtotalText.textContent = `Subtotal: Rs. ${subtotal}`;
+      qtyDisplay.textContent = quantity;
+    }
+
+    increaseBtn.addEventListener("click", () => {
+      quantity++;
+      updateSubtotal();
+    });
+
+    decreaseBtn.addEventListener("click", () => {
+      if (quantity > 1) {
+        quantity--;
+        updateSubtotal();
+      }
+    });
+
+    addCartBtn.addEventListener('click', () => {
+      alert(`Added ${quantity} item(s) to cart. Total: Rs. ${(quantity * pricePerItem).toFixed(2)}`);
+    });
+
+    buyNowBtn.addEventListener('click', () => {
+      alert(`Proceeding to buy ${quantity} item(s) for Rs. ${(quantity * pricePerItem).toFixed(2)}`);
+    });
+
+    const wishlistBtn = document.getElementById('wishlistBtn');
+    let wishlisted = false;
+    wishlistBtn.addEventListener('click', () => {
+      wishlisted = !wishlisted;
+      wishlistBtn.textContent = wishlisted ? '❤' : '♡';
+      wishlistBtn.classList.toggle('text-red-500', wishlisted);
+      wishlistBtn.classList.toggle('text-gray-700', !wishlisted);
+    });
+
+    const shareBtn = document.getElementById('shareBtn');
+    shareBtn.addEventListener('click', () => {
+      alert('Share this product link via your preferred platform!');
+    });
+
+    function toggleWishlist(el) {
+      el.textContent = el.textContent === '❤' ? '♡' : '❤';
+      el.classList.toggle('text-red-500');
+      el.classList.toggle('text-gray-500');
+    }
+  </script>
+</body>
+</html>

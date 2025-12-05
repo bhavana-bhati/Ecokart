@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manufacturing of Bamboo Products</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #d2b48c 0%, #f5f5dc 100%);
+            min-height: 100vh;
+            color: #3c3c3c;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: #556b2f; /* Dark Olive Green */
+        }
+
+        .hero-image {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+            margin: 2rem 0;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .info-card {
+            background: #b7c57f; /* Beige */
+            border-radius: 15px;
+            padding: 2rem;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #3c3c3c; /* Dark font color */
+            opacity: 0; /* Start hidden for animation */
+            transform: translateY(50px); /* Start from below */
+            transition: all 0.5s ease;
+        }
+
+        .info-card.visible {
+            opacity: 1; /* Show when visible */
+            transform: translateY(0); /* Move to original position */
+        }
+
+        .info-card:hover {
+            transform: translateY(-10px) scale(1.05); /* Hover effect */
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .info-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #556b2f; /* Dark Olive Green */
+        }
+
+        .info-card p {
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .info-card {
+                padding: 1.5rem;
+            }
+        }
+        div button:hover {
+            background-color: #6b8e23;   /* lighter olive green */
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 6px 16px rgba(0,0,0,0.4);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🏭 Manufacturing of Bamboo Products</h1>
+            <p>How bamboo is collected and made into useful products</p>
+        </header>
+
+        <img src="https://i.pinimg.com/1200x/01/c6/8b/01c68b4ce895d1b9abc408ea27a6351a.jpg" 
+             alt="Bamboo manufacturing process" 
+             class="hero-image">
+
+        <div class="info-grid">
+            <div class="info-card slide-in-left">
+                <h3>Collecting Bamboo</h3>
+                <p>Bamboo is collected from sustainable forests. Workers carefully cut the bamboo stalks at the right age to ensure they are strong and flexible.</p>
+            </div>
+
+            <div class="info-card slide-in-up">
+                <h3>Processing Bamboo</h3>
+                <p>After collection, the bamboo is cleaned and treated to remove any impurities. It is then cut into smaller pieces for easier handling.</p>
+            </div>
+
+            <div class="info-card slide-in-right">
+                <h3>Shaping Products</h3>
+                <p>The processed bamboo is shaped into various products. This includes bending, cutting, and assembling to create items like kitchenware and furniture.</p>
+            </div>
+
+            <div class="info-card slide-in-left">
+                <h3>Bamboo Kitchenware</h3>
+                <p>Bamboo is made into kitchen items such as utensils, bowls, and cutting boards. These products are durable, lightweight, and eco-friendly.</p>
+            </div>
+
+            <div class="info-card slide-in-up">
+                <h3>Bamboo Furniture</h3>
+                <p>Bamboo is used to create stylish furniture like chairs, tables, and shelves. It is strong and can be designed in many different styles.</p>
+            </div>
+
+            <div class="info-card slide-in-right">
+                <h3>Bamboo Accessories</h3>
+                <p>Bamboo is crafted into various accessories, including vases, coasters, and decorative items. These products add a natural touch to any home.</p>
+            </div>
+        </div>
+    </div>
+            <div style="text-align:center; margin: 3rem 0;">
+        <button onclick="window.history.back()" 
+                style="padding: 12px 24px; 
+                       background-color: #556b2f; 
+                       color: white; 
+                       border: none; 
+                       border-radius: 10px; 
+                       font-size: 1rem; 
+                       cursor: pointer; 
+                       box-shadow: 0 4px 12px rgba(0,0,0,0.3); 
+                       transition: all 0.3s ease;">
+            ⬅ Go Back
+        </button>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const cards = document.querySelectorAll('.info-card');
+
+            function checkScroll() {
+                const triggerBottom = window.innerHeight / 5 * 4; // Trigger when 80% of the viewport is visible
+
+                cards.forEach(card => {
+                    const cardTop = card.getBoundingClientRect().top;
+
+                    if (cardTop < triggerBottom) {
+                        card.classList.add('visible');
+                    }
+                });
+            }
+
+            // Initial check
+            checkScroll();
+
+            // Check on scroll
+            window.addEventListener('scroll', checkScroll);
+        });
+        document.addEventListener('DOMContentLoaded', function() {
+            // your JS here...
+        });
+    </script>
+</body>
+</html>

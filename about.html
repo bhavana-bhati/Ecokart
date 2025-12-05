@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - Bamboo Bliss</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #556B2F; /* Olive green */
+            background-color: #F5F5DC; /* Beige */
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Simple Header */
+        header {
+            background-color: #6B8E23;
+            padding: 1rem 0;
+            text-align: center;
+        }
+
+        .nav-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: #F5F5DC;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            transition: background-color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            background-color: #556B2F;
+        }
+
+        .nav-links a.active {
+            background-color: #556B2F;
+        }
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding: 3rem 0;
+            background: linear-gradient(135deg, #6B8E23 0%, #556B2F 100%);
+            color: #F5F5DC;
+            margin-bottom: 2rem;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Simple Content Sections */
+        .content-section {
+            padding: 2rem 0;
+            text-align: center;
+        }
+
+        .content-section h2 {
+            color: #556B2F;
+            margin-bottom: 1.5rem;
+            font-size: 2rem;
+        }
+
+        .content-section p {
+            font-size: 1.1rem;
+            max-width: 800px;
+            margin: 0 auto 1.5rem;
+            line-height: 1.8;
+        }
+
+        .divider {
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #6B8E23, transparent);
+            margin: 2rem auto;
+            width: 80%;
+            max-width: 400px;
+        }
+
+        /* Simple Team Grid */
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .team-member {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        .team-member img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 1rem;
+            border: 3px solid #6B8E23;
+        }
+
+        .team-member h4 {
+            color: #556B2F;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Simple Footer */
+        footer {
+            background-color: #556B2F;
+            color: #F5F5DC;
+            padding: 1.5rem 0;
+            text-align: center;
+            margin-top: 3rem;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .copyright {
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid rgba(245, 245, 220, 0.3);
+            font-size: 0.9rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            .nav-links {
+                gap: 1rem;
+                flex-wrap: wrap;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .team-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Simple Header -->
+    <header>
+        <nav>
+            <ul class="nav-links">
+                <li><a href="index.php">Home</a></li>
+                <li><a href="product.html">Shop</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <h1>Welcome to Bamboo Bliss</h1>
+            <p>Simple, sustainable bamboo products for everyday life</p>
+        </div>
+    </section>
+
+    <section class="content-section">
+        <div class="container">
+            <h2>Our Story</h2>
+            <p>We started Bamboo Heaven because we believe in making sustainable living simple and accessible. Our journey began with a love for nature and a desire to create products that are good for both people and the planet.</p>
+            <p>Every bamboo product we make is crafted with care, using materials that grow back quickly and processes that respect our environment. We're a small team passionate about bringing you beautiful, eco-friendly alternatives for your home.</p>
+            
+            <div class="divider"></div>
+            
+            <h2>Why Bamboo?</h2>
+            <p>Bamboo is one of the most sustainable materials on Earth. It grows incredibly fast, requires no pesticides, and helps restore soil quality. Our bamboo comes from responsibly managed forests where it's harvested without harming the ecosystem.</p>
+        </div>
+    </section>
+
+    
+    <section class="content-section">
+        <div class="container">
+            <h2>What We Believe In</h2>
+            <p>• Simple, honest products</p>
+            <p>• Environmental responsibility</p>
+            <p>• Quality that lasts</p>
+            <p>• Fair treatment for everyone</p>
+            <p>• Continuous improvement</p>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <h3>Bamboo Heaven</h3>
+                <p>Making sustainable living simple</p>
+                
+                <div class="copyright">
+                    <p>© 2024 Bamboo Bliss. Simple sustainable products.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Simple hover effect for team members
+        document.addEventListener('DOMContentLoaded', function() {
+            const teamMembers = document.querySelectorAll('.team-member');
+            
+            teamMembers.forEach(member => {
+                member.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-5px)';
+                    this.style.transition = 'transform 0.3s ease';
+                });
+                
+                member.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0)';
+                });
+            });
+        });
+    </script>
+</body>
+</html>
+

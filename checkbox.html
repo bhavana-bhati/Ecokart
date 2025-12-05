@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Confirm Product Options</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f3f3f3;
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+    .container {
+      background: white;
+      padding: 20px 25px;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+      max-width: 400px;
+      width: 100%;
+    }
+    h1 {
+      font-size: 22px;
+      margin-bottom: 15px;
+      color: #333;
+    }
+    p {
+      margin: 5px 0 15px;
+      color: #555;
+    }
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    label {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 15px;
+      color: #333;
+    }
+    input[type="checkbox"] {
+      width: 16px;
+      height: 16px;
+    }
+    .btn-group {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 20px;
+    }
+    .btn {
+      padding: 8px 16px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 14px;
+    }
+    .btn-back {
+      background-color: #777;
+      color: white;
+    }
+    .btn-back:hover {
+      background-color: #555;
+    }
+    .btn-proceed {
+      background-color: #28a745;
+      color: white;
+    }
+    .btn-proceed:hover {
+      background-color: #1e7e34;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Select Product Options</h1>
+    <p>Product: <span id="productName" style="font-weight: bold;">Bamboo Product</span></p>
+
+    <form id="optionsForm">
+      <label><input type="checkbox" name="giftWrap"> Add Gift Wrap (+₹50)</label>
+      <label><input type="checkbox" name="expressDelivery"> Express Delivery (+₹100)</label>
+      <label><input type="checkbox" name="ecoPackaging"> Eco-friendly Packaging</label>
+      <label><input type="checkbox" name="insurance"> Shipping Insurance (+₹30)</label>
+
+      <div class="btn-group">
+        <a href="../index.html" class="btn btn-back">Back</a>
+        <button type="submit" class="btn btn-proceed">Proceed</button>
+      </div>
+    </form>
+  </div>
+
+  <script>
+    // Get product name from URL
+    const params = new URLSearchParams(window.location.search);
+    const productName = params.get("product");
+    if(productName) {
+      document.getElementById("productName").textContent = decodeURIComponent(productName);
+    }
+
+    // Form submit
+    document.getElementById("optionsForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+      alert("Your options have been saved. Proceeding to payment...");
+    });
+  </script>
+</body>
+</html>

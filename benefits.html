@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Benefits of Bamboo</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #d2b48c 0%, #f5f5dc 100%);
+            min-height: 100vh;
+            color: #3c3c3c;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+            color: #556b2f; /* Dark Olive Green */
+        }
+
+        .hero-image {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+            margin: 2rem 0;
+            transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        .hero-image:hover {
+            transform: scale(1.02) translateY(-10px);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.5);
+        }
+
+        .benefit-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .benefit-card {
+            background: #b7c57f; /* Beige */
+            border-radius: 15px;
+            padding: 2rem;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            color: #3c3c3c; /* Dark font color */
+        }
+
+        .benefit-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.6s;
+        }
+
+        .benefit-card:hover {
+            transform: translateY(-15px) scale(1.05);
+            background: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+        }
+
+        .benefit-card:hover::before {
+            left: 100%;
+        }
+
+        .benefit-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #556b2f; /* Dark Olive Green */
+        }
+
+        .benefit-card p {
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+
+        .slide-in-left {
+            opacity: 0;
+            transform: translateX(-100px);
+            transition: all 0.8s ease-out;
+        }
+
+        .slide-in-right {
+            opacity: 0;
+            transform: translateX(100px);
+            transition: all 0.8s ease-out;
+        }
+
+        .slide-in-up {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s ease-out;
+        }
+
+        .visible {
+            opacity: 1;
+            transform: translate(0);
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .benefit-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+            
+            .benefit-card {
+                padding: 1.5rem;
+            }
+        }
+        div button:hover {
+            background-color: #6b8e23;   /* lighter olive green */
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 6px 16px rgba(0,0,0,0.4);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🌱 Benefits of Bamboo</h1>
+            <p>A sustainable and versatile resource</p>
+        </header>
+
+        <img src="https://www.youchengbamboo.com/uploads/202412/youcheng_1735192384_WNo_1600d900.jpg" 
+             alt="Bamboo forest showcasing its beauty and versatility" 
+             class="hero-image slide-in-up">
+
+        <div class="benefit-grid">
+            <div class="benefit-card slide-in-left">
+                <h3>Eco-Friendly</h3>
+                <p>Bamboo absorbs more carbon dioxide and releases more oxygen than most trees, making it a great ally in combating climate change.</p>
+            </div>
+
+            <div class="benefit-card slide-in-up">
+                <h3>Fast Growth</h3>
+                <p>It can grow up to <span class="highlight">35 inches in a single day</span>, making it a highly renewable resource.</p>
+            </div>
+
+            <div class="benefit-card slide-in-right">
+                <h3>Strong Material</h3>
+                <p>Bamboo is stronger than steel in tensile strength, making it an excellent material for construction and furniture.</p>
+            </div>
+
+            <div class="benefit-card slide-in-left">
+                <h3>Versatile Uses</h3>
+                <p>From building materials to textiles, bamboo can be used in a variety of products, including paper, flooring, and clothing.</p>
+            </div>
+
+            <div class="benefit-card slide-in-up">
+                <h3>Soil Health</h3>
+                <p>Bamboo helps prevent soil erosion and improves soil health by maintaining moisture and nutrients.</p>
+            </div>
+
+            <div class="benefit-card slide-in-right">
+                <h3>Natural Pest Repellent</h3>
+                <p>Bamboo has natural pest-repelling properties, reducing the need for chemical pesticides in agriculture.</p>
+            </div>
+        </div>
+    </div>
+<div style="text-align:center; margin: 3rem 0;">
+        <button onclick="window.history.back()" 
+                style="padding: 12px 24px; 
+                       background-color: #556b2f; 
+                       color: white; 
+                       border: none; 
+                       border-radius: 10px; 
+                       font-size: 1rem; 
+                       cursor: pointer; 
+                       box-shadow: 0 4px 12px rgba(0,0,0,0.3); 
+                       transition: all 0.3s ease;">
+            ⬅ Go Back
+        </button>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Animation on scroll
+            const animatedElements = document.querySelectorAll('.slide-in-left, .slide-in-right, .slide-in-up');
+            
+            function checkScroll() {
+                animatedElements.forEach(element => {
+                    const elementTop = element.getBoundingClientRect().top;
+                    const elementVisible = 150;
+                    
+                    if (elementTop < window.innerHeight - elementVisible) {
+                        element.classList.add('visible');
+                    }
+                });
+            }
+
+            // Initial check
+            checkScroll();
+
+            // Check on scroll
+            window.addEventListener('scroll', checkScroll);
+
+            // Image fallback
+            const images = document.querySelectorAll('img');
+            images.forEach(img => {
+                img.onerror = function() {
+                    this.style.backgroundColor = 'rgba(255,255,255,0.1)';
+                    this.style.display = 'flex';
+                    this.style.alignItems = 'center';
+                    this.style.justifyContent = 'center';
+                    this.style.color = '#d1f2d1';
+                    this.style.fontWeight = 'bold';
+                    this.style.fontSize = '1.2rem';
+                    this.innerHTML = 'Bamboo Forest';
+                };
+            });
+
+            // Enhanced hover effects
+            const cards = document.querySelectorAll('.benefit-card');
+            cards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-20px) scale(1.08)';
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0) scale(1)';
+                });
+            });
+        });
+        document.addEventListener('DOMContentLoaded', function() {
+            // your JS here...
+        });
+    </script>
+</body>
+</html>
